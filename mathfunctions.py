@@ -834,10 +834,7 @@ def multiplication_step_by_step_short2(number_of_samples):
     return problems
 
 
-def long_division(dividend, divisor):
-    quotient = dividend // divisor
-    remainder = dividend % divisor
-    return quotient, remainder
+
 import random
 
 def division_step_by_step1(number_of_samples):
@@ -848,6 +845,10 @@ def division_step_by_step1(number_of_samples):
         "No problem, we've got {dividend} and {divisor} for the division.",
         "Sure thing! Let's divide {dividend} by {divisor} together."
     ]
+    def long_division(dividend, divisor):
+        quotient = dividend // divisor
+        remainder = dividend % divisor
+        return quotient, remainder
     #explanation += template.format(dividend=dividend, divisor=divisor) + "\n"
     explanations = []
     def step_by_step_solution(dividend, divisor):
@@ -900,7 +901,10 @@ def division_step_by_step1(number_of_samples):
 
 def division_step_by_step2(number_of_samples):
 
-
+  def long_division(dividend, divisor):
+        quotient = dividend // divisor
+        remainder = dividend % divisor
+        return quotient, remainder
   def step_by_step_solution(dividend, divisor):
       quotient, remainder = long_division(dividend, divisor)
       result = str(quotient) + " R" + str(remainder)
@@ -1041,7 +1045,10 @@ def division_step_by_step2(number_of_samples):
 
 
 def division_step_by_step3(number_of_samples):
-
+  def long_division(dividend, divisor):
+        quotient = dividend // divisor
+        remainder = dividend % divisor
+        return quotient, remainder
 
   def step_by_step_solution(dividend, divisor):
       quotient, remainder = long_division(dividend, divisor)
@@ -1895,7 +1902,7 @@ def generate_linear_functions(n_samples):
 
 
 # Generate 1 problem
-#problems = generate_linear_functions(1)
+#problems = generate_division_problems (1)
 
 # Print the problem
 #print(problems[0])
