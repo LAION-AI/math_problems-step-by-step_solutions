@@ -41,7 +41,7 @@ functions = {}
 for function_name in global_functions:
     functions [function_name]= ceiling(num_samples_total /len(global_functions))
 print(global_functions)
-#result = add_values_in_dictionary(functions)
+result = add_values_in_dictionary(functions)
 print("Sum of all ordered math problems in the dict:", result)
 
 execute_functions(functions, num_samples_total)
