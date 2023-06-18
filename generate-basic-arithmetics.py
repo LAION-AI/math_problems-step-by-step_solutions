@@ -19,11 +19,13 @@ def execute_functions(function_dict, n):
         function = getattr(basic_arithmetic_functions, function_name, None)
         
         if function and callable(function):
-
+            try:
                 result = function(function_dict[function_name])
                 print(function_name, ": ", result)
-
-
+            except Exception as e:
+                print("Error:", function_name, "-", str(e))
+        else:
+            print("Invalid function:", function_name)
 
             
 def add_values_in_dictionary(dictionary):
