@@ -9,11 +9,12 @@ global_functions = [
     if inspect.isfunction(obj) and inspect.getmodule(obj) == mathfunctions
 ]
 
-
-num_samples_total=10
+num_samples_total = 10
 
 def execute_functions(function_dict, n):
     import mathfunctions
+    
+    results = []
     
     for function_name in function_dict:
         function = getattr(mathfunctions, function_name, None)
@@ -21,27 +22,33 @@ def execute_functions(function_dict, n):
         if function and callable(function):
             try:
                 result = function(function_dict[function_name])
-                print(function_name, ": ", result)
+                results.append(result)
             except Exception as e:
                 print("Error:", function_name, "-", str(e))
         else:
             print("Invalid function:", function_name)
+    
+    return results
 
-            
 def add_values_in_dictionary(dictionary):
     total = 0
     for value in dictionary.values():
         total += value
     return total
 
-# Beispielaufruf
+# Create a dictionary of function names and corresponding values
 functions = {}
-
-# Print the list of function names
 for function_name in global_functions:
-    functions [function_name]= ceiling(num_samples_total /len(global_functions))
-print(global_functions)
-result = add_values_in_dictionary(functions)
-print("Sum of all ordered math problems in the dict:", result)
+    functions[function_name] = ceiling(num_samples_total / len(global_functions))
 
-execute_functions(functions, num_samples_total)
+# Get the list of results
+result_list = execute_functions(functions, num_samples_total)
+
+# Print the list of results
+print("List of results:")
+for result in result_list:
+    print(result)
+
+# Calculate and print the sum of results
+result_sum = add_values_in_dictionary(functions)
+print("Sum of all ordered math problems in the dict:", result_sum)
