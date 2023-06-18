@@ -1,6 +1,9 @@
 from sympy.functions.elementary.integers import ceiling
 import mathfunctions
 import inspect
+import itertools
+import random
+
 
 # Get all global functions from the mathfunctions module
 global_functions = [
@@ -8,7 +11,7 @@ global_functions = [
     for name, obj in inspect.getmembers(mathfunctions)
     if inspect.isfunction(obj) and inspect.getmodule(obj) == mathfunctions
 ]
-
+ 
 num_samples_total = 100
 
 def execute_functions(function_dict, n):
@@ -46,12 +49,18 @@ for function_name in global_functions:
 # Get the list of results
 result_list = execute_functions(functions, num_samples_total)
 
-# Print the list of results
-print("List of results:")
-for result in result_list:
-    #if len(result) != 3:
-    print(result)
+concatenated_list = list(itertools.chain(*result_list))
+
+# Shuffle the concatenated list
+random.shuffle(concatenated_list)
+
+# Print the shuffled list
+print("Shuffled list:")
+for item in concatenated_list:
+    print(item)
+
 
 # Calculate and print the sum of results
 result_sum = add_values_in_dictionary(functions)
 print("Sum of all ordered math problems in the dict:", result_sum)
+
