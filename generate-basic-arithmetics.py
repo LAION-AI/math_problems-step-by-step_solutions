@@ -3,7 +3,8 @@ import basicmathsfunctions
 import inspect
 import itertools
 import random
-
+import argparse
+import pandas as pd
 
 # Get all global functions from the mathfunctions module
 global_functions = [
@@ -11,8 +12,6 @@ global_functions = [
     for name, obj in inspect.getmembers(basicmathsfunctions)
     if inspect.isfunction(obj) and inspect.getmodule(obj) == basicmathsfunctions
 ]
- 
-num_samples_total = 100
 
 def execute_functions(function_dict, n):
     import basicmathsfunctions
@@ -39,26 +38,32 @@ def add_values_in_dictionary(dictionary):
         total += value
     return total
 
+# Parse command-line arguments
+parser = argparse.ArgumentParser()
+parser.add_argument("num_samples_total", type=int, help="Total number of samples")
+parser.add_argument("outputpath", help="Output path for the Parquet file")
+args = parser.parse_args()
+
 # Create a dictionary of function names and assign the desired number of samples to each function
 functions = {}
-num_samples_per_function = ceiling(num_samples_total / len(global_functions))
+num_samples_per_function = ceiling(args.num_samples_total / len(global_functions))
 for function_name in global_functions:
-    #print(num_samples_per_function)
     functions[function_name] = num_samples_per_function
 
 # Get the list of results
-result_list = execute_functions(functions, num_samples_total)
+result_list = execute_functions(functions, args.num_samples_total)
 
+# Concatenate the lists in result_list
 concatenated_list = list(itertools.chain(*result_list))
 
 # Shuffle the concatenated list
 random.shuffle(concatenated_list)
 
-# Print the shuffled list
-print("Shuffled list:")
-for item in concatenated_list:
-    print(item)
+# Create a DataFrame from the shuffled list
+df = pd.DataFrame({"problem+solution": concatenated_list})
 
+# Save the DataFrame as a Parquet file
+df.to_parquet(args.outputpath,  row_group_size=1000)
 
 # Calculate and print the sum of results
 result_sum = add_values_in_dictionary(functions)
