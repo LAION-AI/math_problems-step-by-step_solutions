@@ -1,5 +1,5 @@
 from sympy.functions.elementary.integers import ceiling
-import basic-arithmetic-functions
+import basic_arithmetic_functions
 import inspect
 
 # Get all global functions from the mathfunctions module
@@ -13,10 +13,10 @@ global_functions = [
 num_samples_total=10
 
 def execute_functions(function_dict, n):
-    import basic-arithmetic-functions
+    import basic_arithmetic_functions
     
     for function_name in function_dict:
-        function = getattr(basic-arithmetic-functions, function_name, None)
+        function = getattr(basic_arithmetic_functions, function_name, None)
         
         if function and callable(function):
             try:
