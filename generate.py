@@ -32,6 +32,7 @@ def execute_functions(function_dict, n):
     
     results_corrected=[]
     for e in results:
+      e= random.sample(e, len(e))
       e = e[:num_samples_per_function]
       results_corrected.append(e)
       #print(len(e))
