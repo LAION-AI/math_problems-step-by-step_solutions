@@ -30,7 +30,12 @@ def execute_functions(function_dict, n):
         else:
             print("Invalid function:", function_name)
     
-    return results
+    results_corrected=[]
+    for e in results:
+      e = e[:num_samples_per_function]
+      results_corrected.append(e)
+      #print(len(e))
+    return results_corrected
 
 def add_values_in_dictionary(dictionary):
     total = 0
@@ -57,13 +62,14 @@ result_list = execute_functions(functions, args.num_samples_total)
 concatenated_list = list(itertools.chain(*result_list))
 
 # Shuffle the concatenated list
-random.shuffle(concatenated_list)
+shuffled_list = random.sample(concatenated_list, len(concatenated_list))
 
 # Create a DataFrame from the shuffled list
-df = pd.DataFrame({"problem+solution": concatenated_list})
+df = pd.DataFrame({"problem+solution": shuffled_list, "index": range(len(shuffled_list))})
 
 # Save the DataFrame as a Parquet file
 df.to_parquet(args.outputpath,  row_group_size=1000)
+print(df)
 
 # Calculate and print the sum of results
 result_sum = add_values_in_dictionary(functions)
