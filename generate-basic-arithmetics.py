@@ -31,6 +31,7 @@ def execute_functions(function_dict, n):
             print("Invalid function:", function_name)
     results_corrected=[]
     for e in results:
+      e= random.sample(e, len(e))
       e = e[:num_samples_per_function]
       results_corrected.append(e)
       #print(len(e))
