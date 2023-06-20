@@ -57,7 +57,7 @@ result_list = execute_functions(functions, args.num_samples_total)
 concatenated_list = list(itertools.chain(*result_list))
 
 # Shuffle the concatenated list
-random.shuffle(concatenated_list)
+concatenated_list = random.shuffle(concatenated_list)
 
 # Create a DataFrame from the shuffled list
 df = pd.DataFrame({"problem+solution": concatenated_list})
