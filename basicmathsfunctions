@@ -230,10 +230,10 @@ def generate_exponential_with_2_numbers_problems(number_of_samples):
     results_exponential_2_nums = []
     for _ in range(number_of_samples):
         a = random.randint(-100000,100000) / 100
-        b = random.randint(0,200) / 20
-
+        b = random.randint(0,100) / 20
         result = a ** b
         part1 = str(a) + " ** " + str(b) + " = "
+
         part2 = str(result)
         results_exponential_2_nums.append(part1 + "\n" + part2)
 
