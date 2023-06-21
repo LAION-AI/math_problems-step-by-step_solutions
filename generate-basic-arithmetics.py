@@ -24,13 +24,8 @@ def execute_functions(function_dict, n):
         if function and callable(function):
             try:
                 result = function(function_dict[function_name])
-                tmplist=[]
-                for e in result:
-                    tmplist.append(e)
-                    modifizierter_string, ersetzte_zahl = ersetze_zahl_mit_fragezeichen(e) )
-                    tmplist.append(modifizierter_string+" ; ? = "+str(ersetzte_zahl) )
-                    
-                results.append(tmplist)
+                
+                results.append(result)
             except Exception as e:
                 print("Error:", function_name, "-", str(e))
         else:
@@ -42,15 +37,6 @@ def execute_functions(function_dict, n):
       results_corrected.append(e)
       #print(len(e))
     return results_corrected
-def ersetze_zahl_mit_fragezeichen(string):
-    zahlen = re.findall(r'\d+', string)  # Finde alle Zahlen im String
-    if not zahlen:
-        return string, None  # Keine Zahlen im String gefunden
-
-    ersetze_zahl = random.choice(zahlen)  # Zufällige Zahl auswählen
-    modifizierter_string = string.replace(ersetze_zahl, "?")  # Zahl durch "?" ersetzen
-
-    return modifizierter_string, int(ersetze_zahl)
 
 
 def add_values_in_dictionary(dictionary):
